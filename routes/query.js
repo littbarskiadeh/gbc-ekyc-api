@@ -47,10 +47,12 @@ router.get('/', async function (req, res, next) {
         // Evaluate the specified transaction.
         // queryUser transaction - requires 1 argument, ex: ('queryUser', 'USER4')
         // queryAllUsers transaction - requires no arguments, ex: ('queryAllUsers')
-        // const result = await contract.evaluateTransaction('queryAllCars');
         const result = await contract.evaluateTransaction('queryAllUsers');
 
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+
+        // send result as JSON
+        res.json(JSON.parse(result.toString()));
 
         // Disconnect from the gateway.
         await gateway.disconnect();
